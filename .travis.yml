@@ -19,7 +19,7 @@ before_install:
   - pip install --user virtualenv
   - virtualenv ~/cli-ve
   - source ~/cli-ve/bin/activate
-  - pip install --upgrade awscli
+  - pip3 install --upgrade awscli
   - aws --version
   
 install:
