@@ -14,8 +14,9 @@ before_install:
   - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
   - chmod +x ./kubectl
   - sudo mv ./kubectl /usr/local/bin/kubectl
-  - aws eks update-kubeconfig --name $EKS_CLUSTER_NAME
-
+  - pip3 install awscli --upgrade --user
+  
 install:
+  - aws eks update-kubeconfig --name $EKS_CLUSTER_NAME
   - echo Hello World
   
