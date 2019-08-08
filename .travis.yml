@@ -1,7 +1,5 @@
 language: minimal
 
-python: 3.6
-
 services: docker
 
 env:
@@ -35,4 +33,5 @@ install:
   - export AWS_EXPIRATION=$(echo ${CREDENTIALS} | jq -r '.Credentials.Expiration')
   - aws eks update-kubeconfig --region $EKS_CLUSTER_REGION --name $EKS_CLUSTER_NAME
   - echo Hello World
+  - kubectl get pods
   
