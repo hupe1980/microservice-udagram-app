@@ -14,7 +14,11 @@ before_install:
   - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
   - chmod +x ./kubectl
   - sudo mv ./kubectl /usr/local/bin/kubectl
-  - pip install awscli --upgrade --user
+  - pip install --user virtualenv
+  - virtualenv ~/cli-ve
+  - source ~/cli-ve/bin/activate
+  - pip install --upgrade awscli
+  - aws --version
   
 install:
   - CREDENTIALS=$(aws sts assume-role --role-arn $EKS_KUBECTL_ROLE_ARN --role-session-name travis-kubectl --duration-seconds 900)
