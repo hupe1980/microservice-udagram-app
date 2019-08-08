@@ -6,6 +6,11 @@ services: docker
 
 env:
   - DOCKER_COMPOSE_VERSION=1.23.2
+  
+addons:
+  apt:
+    packages:
+      - python3-pip
 
 before_install:
   - docker -v && docker-compose -v
@@ -16,7 +21,7 @@ before_install:
   - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
   - chmod +x ./kubectl
   - sudo mv ./kubectl /usr/local/bin/kubectl
-  - pip install --user virtualenv
+  - pip3 install --user virtualenv
   - virtualenv ~/cli-ve
   - source ~/cli-ve/bin/activate
   - pip3 install --upgrade awscli
