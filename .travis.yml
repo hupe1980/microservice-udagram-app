@@ -50,6 +50,7 @@ install:
   - aws eks update-kubeconfig --region $EKS_CLUSTER_REGION --name $EKS_CLUSTER_NAME
 
 script:
+  - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD 
   - docker-compose -f udacity-c3-deployment/docker/docker-compose-build.yaml build --parallel
   - docker-compose -f udacity-c3-deployment/docker/docker-compose-build.yaml push
 
