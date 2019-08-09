@@ -11,7 +11,7 @@ You'll need to install docker https://docs.docker.com/install/. Open a new termi
 3. Push the images: `docker-compose -f docker-compose-build.yaml push`
 4. Run the container: `docker-compose up`
 
-### Setup k86 Enviroment
+### Setup k8s Environment
 
 1. Create the cluster: `eksctl create cluster --name udagram`
 2. Create travis-user: `eksctl create iamidentitymapping --name  udagram --role arn:aws:iam::?:role/travis_eks --group system:masters --username travis_eks`
