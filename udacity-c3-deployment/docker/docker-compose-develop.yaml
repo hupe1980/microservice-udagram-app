@@ -1,0 +1,60 @@
+version: "3"
+services:
+  reverseproxy:
+      image: hupe1980/udacity-reverseproxy
+      ports:
+          - 8080:8080
+      restart: always
+      depends_on:
+        - backend-user
+        - backend-feed     
+  backend-user:
+    build:
+      dockerfile: Dockerfile
+      context: ../../udacity-c3-restapi-user
+    env_file: 
+      - ../../.env
+    volumes:
+      - /usr/src/app/node_modules
+      - ../../udacity-c3-restapi-user:/usr/src/app    
+    # environment:
+    #   POSTGRESS_USERNAME: $POSTGRESS_USERNAME
+    #   POSTGRESS_PASSWORD: $POSTGRESS_PASSWORD 
+    #   POSTGRESS_DB: $POSTGRESS_DB 
+    #   POSTGRESS_HOST: $POSTGRESS_HOST 
+    #   AWS_REGION: $AWS_REGION 
+    #   AWS_PROFILE: $AWS_PROFILE 
+    #   AWS_BUCKET: $AWS_BUCKET
+    #   JWT_SECRET: $JWT_SECRET
+    #   URL: "http://localhost:8100"
+  backend-feed:
+    build:
+      dockerfile: Dockerfile
+      context: ../../udacity-c3-restapi-feed
+    env_file: 
+      - ../../.env
+    volumes:
+      - $HOME/.aws:/root/.aws
+      - /usr/src/app/node_modules
+      - ../../udacity-c3-restapi-feed:/usr/src/app  
+    # environment:
+    #   POSTGRESS_USERNAME: $POSTGRESS_USERNAME
+    #   POSTGRESS_PASSWORD: $POSTGRESS_PASSWORD 
+    #   POSTGRESS_DB: $POSTGRESS_DB 
+    #   POSTGRESS_HOST: $POSTGRESS_HOST 
+    #   AWS_REGION: $AWS_REGION 
+    #   AWS_PROFILE: $AWS_PROFILE 
+    #   AWS_BUCKET: $AWS_BUCKET
+    #   JWT_SECRET: $JWT_SECRET
+    #   URL: "http://localhost:8100"
+  frontend:
+    build:
+      dockerfile: Dockerfile
+      context: ../../udacity-c3-frontend
+    env_file: 
+      - ../../.env
+    volumes:
+      - /usr/src/app/node_modules
+      - ../../udacity-c3-frontend:/usr/src/app  
+    ports:
+      - "8100:80"

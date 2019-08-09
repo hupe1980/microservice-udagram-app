@@ -6,6 +6,7 @@ env:
   - DOCKER_COMPOSE_VERSION=1.23.2
   - KUBECTL_VERSION=1.13.7
   - AWS_IAM_AUTHENTICATOR_VERSION=1.13.7
+  - SHA=$(git rev-parse HEAD)
   
 addons:
   apt:
@@ -46,5 +47,13 @@ install:
   - export AWS_SESSION_TOKEN="$(echo ${CREDENTIALS} | jq -r '.Credentials.SessionToken')"
   - export AWS_EXPIRATION=$(echo ${CREDENTIALS} | jq -r '.Credentials.Expiration')
   - aws eks update-kubeconfig --region $EKS_CLUSTER_REGION --name $EKS_CLUSTER_NAME
-  - kubectl get pods
+
+script: scripts/build.sh
+
+deploy:
+  - provider: script
+    script: bash scripts/deploy.sh production
+    on:
+      branch: master
+
   
