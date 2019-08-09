@@ -41,7 +41,5 @@ install:
   - export AWS_SESSION_TOKEN="$(echo ${CREDENTIALS} | jq -r '.Credentials.SessionToken')"
   - export AWS_EXPIRATION=$(echo ${CREDENTIALS} | jq -r '.Credentials.Expiration')
   - aws eks update-kubeconfig --region $EKS_CLUSTER_REGION --name $EKS_CLUSTER_NAME
-  - cat /home/travis/.kube/config
-  - echo Hello World
   - kubectl get pods
   
