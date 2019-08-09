@@ -25,7 +25,6 @@ before_install:
   - openssl sha1 -sha256 kubectl
   - chmod +x ./kubectl
   - sudo mv ./kubectl /usr/local/bin/kubectl
-  - kubectl version --short --client
   
   - curl -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/${AWS_IAM_AUTHENTICATOR_VERSION}/2019-06-11/bin/linux/amd64/aws-iam-authenticator
   - curl -o aws-iam-authenticator.sha256 https://amazon-eks.s3-us-west-2.amazonaws.com/${AWS_IAM_AUTHENTICATOR_VERSION}/2019-06-11/bin/linux/amd64/aws-iam-authenticator.sha256
